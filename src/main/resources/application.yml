@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: formula
+  profiles:
+    active: dev
+
+  datasource:
+    url: jdbc:mysql://115.28.223.9:3306/phoenix?useUnicode=true&characterEncoding=utf8
+    username: root
+    password: qawsedrftg$@1
+    driver-class-name: com.mysql.jdbc.Driver
+    poolConfig:
+      initialSize : 1
+      minIdle: 1
+      maxActive: 20
+      maxWait: 60000
+
+
+mybatis:
+  mapper-locations: classpath:mybatis/mapper/*.xml
+  type-aliases-package: com.zhongyao.domain

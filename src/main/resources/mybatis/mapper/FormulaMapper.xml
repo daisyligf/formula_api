@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhongyao.dao.FormulaMapper">
+    <resultMap id="BaseResultMap" type="com.zhongyao.domain.Formula">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="formula_name" jdbcType="VARCHAR" property="formulaName"/>
+        <result column="formula_id" jdbcType="INTEGER" property="formulaId"/>
+        <result column="formula_role" jdbcType="INTEGER" property="formulaRole"/>
+        <result column="medicine" jdbcType="VARCHAR" property="medicine"/>
+        <result column="dose" jdbcType="VARCHAR" property="dose"/>
+        <result column="unit" jdbcType="VARCHAR" property="unit"/>
+        <result column="process" jdbcType="VARCHAR" property="process"/>
+        <result column="book" jdbcType="VARCHAR" property="book"/>
+        <result column="author" jdbcType="VARCHAR" property="author"/>
+        <result column="dynasty" jdbcType="VARCHAR" property="dynasty"/>
+        <result column="effect" jdbcType="VARCHAR" property="effect"/>
+        <result column="indications" jdbcType="VARCHAR" property="indications"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, formula_name, formula_id, formula_role, medicine, dose, unit, process, book,
+        author, dynasty, effect, indications
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from formula
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+
+    <select id="getAllFormulaNames" resultType="java.lang.String">
+        select distinct formula_name from formula
+    </select>
+
+    <select id="getAllMedicineNames" resultType="java.lang.String">
+        select distinct medicine from formula
+    </select>
+
+    <select id="selectByFormulaAndBook" resultMap="BaseResultMap">
+        select * from formula where formula_name = #{formulaName} and book = #{bookName}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from formula
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.zhongyao.domain.Formula">
+        insert into formula (id, formula_name, formula_id,
+        formula_role, medicine, dose,
+        unit, process, book,
+        author, dynasty, effect,
+        indications)
+        values (#{id,jdbcType=INTEGER}, #{formulaName,jdbcType=VARCHAR}, #{formulaId,jdbcType=INTEGER},
+        #{formulaRole,jdbcType=INTEGER}, #{medicine,jdbcType=VARCHAR}, #{dose,jdbcType=VARCHAR},
+        #{unit,jdbcType=VARCHAR}, #{process,jdbcType=VARCHAR}, #{book,jdbcType=VARCHAR},
+        #{author,jdbcType=VARCHAR}, #{dynasty,jdbcType=VARCHAR}, #{effect,jdbcType=VARCHAR},
+        #{indications,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.zhongyao.domain.Formula">
+        insert into formula
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="formulaName != null">
+                formula_name,
+            </if>
+            <if test="formulaId != null">
+                formula_id,
+            </if>
+            <if test="formulaRole != null">
+                formula_role,
+            </if>
+            <if test="medicine != null">
+                medicine,
+            </if>
+            <if test="dose != null">
+                dose,
+            </if>
+            <if test="unit != null">
+                unit,
+            </if>
+            <if test="process != null">
+                process,
+            </if>
+            <if test="book != null">
+                book,
+            </if>
+            <if test="author != null">
+                author,
+            </if>
+            <if test="dynasty != null">
+                dynasty,
+            </if>
+            <if test="effect != null">
+                effect,
+            </if>
+            <if test="indications != null">
+                indications,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="formulaName != null">
+                #{formulaName,jdbcType=VARCHAR},
+            </if>
+            <if test="formulaId != null">
+                #{formulaId,jdbcType=INTEGER},
+            </if>
+            <if test="formulaRole != null">
+                #{formulaRole,jdbcType=INTEGER},
+            </if>
+            <if test="medicine != null">
+                #{medicine,jdbcType=VARCHAR},
+            </if>
+            <if test="dose != null">
+                #{dose,jdbcType=VARCHAR},
+            </if>
+            <if test="unit != null">
+                #{unit,jdbcType=VARCHAR},
+            </if>
+            <if test="process != null">
+                #{process,jdbcType=VARCHAR},
+            </if>
+            <if test="book != null">
+                #{book,jdbcType=VARCHAR},
+            </if>
+            <if test="author != null">
+                #{author,jdbcType=VARCHAR},
+            </if>
+            <if test="dynasty != null">
+                #{dynasty,jdbcType=VARCHAR},
+            </if>
+            <if test="effect != null">
+                #{effect,jdbcType=VARCHAR},
+            </if>
+            <if test="indications != null">
+                #{indications,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.zhongyao.domain.Formula">
+        update formula
+        <set>
+            <if test="formulaName != null">
+                formula_name = #{formulaName,jdbcType=VARCHAR},
+            </if>
+            <if test="formulaId != null">
+                formula_id = #{formulaId,jdbcType=INTEGER},
+            </if>
+            <if test="formulaRole != null">
+                formula_role = #{formulaRole,jdbcType=INTEGER},
+            </if>
+            <if test="medicine != null">
+                medicine = #{medicine,jdbcType=VARCHAR},
+            </if>
+            <if test="dose != null">
+                dose = #{dose,jdbcType=VARCHAR},
+            </if>
+            <if test="unit != null">
+                unit = #{unit,jdbcType=VARCHAR},
+            </if>
+            <if test="process != null">
+                process = #{process,jdbcType=VARCHAR},
+            </if>
+            <if test="book != null">
+                book = #{book,jdbcType=VARCHAR},
+            </if>
+            <if test="author != null">
+                author = #{author,jdbcType=VARCHAR},
+            </if>
+            <if test="dynasty != null">
+                dynasty = #{dynasty,jdbcType=VARCHAR},
+            </if>
+            <if test="effect != null">
+                effect = #{effect,jdbcType=VARCHAR},
+            </if>
+            <if test="indications != null">
+                indications = #{indications,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.zhongyao.domain.Formula">
+        update formula
+        set formula_name = #{formulaName,jdbcType=VARCHAR},
+        formula_id = #{formulaId,jdbcType=INTEGER},
+        formula_role = #{formulaRole,jdbcType=INTEGER},
+        medicine = #{medicine,jdbcType=VARCHAR},
+        dose = #{dose,jdbcType=VARCHAR},
+        unit = #{unit,jdbcType=VARCHAR},
+        process = #{process,jdbcType=VARCHAR},
+        book = #{book,jdbcType=VARCHAR},
+        author = #{author,jdbcType=VARCHAR},
+        dynasty = #{dynasty,jdbcType=VARCHAR},
+        effect = #{effect,jdbcType=VARCHAR},
+        indications = #{indications,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+</mapper>
